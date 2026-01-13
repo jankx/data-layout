@@ -10,5 +10,13 @@
                 </div>
             {/foreach}
         </div>
+
+        {if !empty($pagination)}
+            <div class="jankx-pagination">
+                <nav class="woocommerce-pagination">
+                    {$pagination|noescape}
+                </nav>
+            </div>
+        {/if}
     </div>
 </div>
