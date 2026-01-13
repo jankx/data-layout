@@ -1,4 +1,7 @@
-<div class="jankx-data-layout grid {$columns ?? '3'}">
+<div class="jankx-data-layout grid"
+     data-columns="{$columns ?? '4'}"
+     data-columns-md="{$columns__md ?? '3'}"
+     data-columns-sm="{$columns__sm ?? '1'}">
     <div class="jankx-container">
         <div class="row">
             {foreach $items as $item}

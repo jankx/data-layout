@@ -1,4 +1,8 @@
-<div class="jankx-data-layout carousel slider" data-flickity='{ "cellAlign": "left", "contain": true }'>
+<div class="jankx-data-layout carousel slider" 
+     data-flickity='{ "cellAlign": "left", "contain": true }'
+     data-columns="{$columns ?? '4'}"
+     data-columns-md="{$columns__md ?? '3'}"
+     data-columns-sm="{$columns__sm ?? '1'}">
     {foreach $items as $item}
         <div class="carousel-cell">
             {$item|noescape}

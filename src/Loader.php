@@ -3,6 +3,16 @@ namespace Jankx\DataLayout;
 
 use Jankx\TemplateEngine\Engines\LatteEngine;
 use Jankx\TemplateEngine\TemplateEngine;
+use Jankx\DataLayout\Layouts\Grid;
+use Jankx\DataLayout\Layouts\ListLayout;
+use Jankx\DataLayout\Layouts\Carousel;
+use Jankx\DataLayout\Layouts\Masonry;
+use Jankx\DataLayout\Layouts\Horizontal;
+use Jankx\DataLayout\ContentLayouts\Card;
+use Jankx\DataLayout\ContentLayouts\Simple;
+use Jankx\DataLayout\ContentLayouts\Native;
+use Jankx\DataLayout\ContentLayouts\AkselosCard;
+use Jankx\DataLayout\AjaxHandler;
 
 class Loader
 {
@@ -16,15 +26,17 @@ class Loader
         $manager = LayoutManager::getInstance($templateEngine);
 
         // Register default Data Layouts
-        $manager->registerDataLayout('grid', Layouts\Grid::class);
-        $manager->registerDataLayout('list', Layouts\ListLayout::class);
-        $manager->registerDataLayout('carousel', Layouts\Carousel::class);
-        $manager->registerDataLayout('masonry', Layouts\Masonry::class);
-        $manager->registerDataLayout('horizontal', Layouts\Horizontal::class);
+        $manager->registerDataLayout('grid', Grid::class);
+        $manager->registerDataLayout('list', ListLayout::class);
+        $manager->registerDataLayout('carousel', Carousel::class);
+        $manager->registerDataLayout('masonry', Masonry::class);
+        $manager->registerDataLayout('horizontal', Horizontal::class);
 
         // Register default Content Layouts
-        $manager->registerContentLayout('card', ContentLayouts\Card::class);
-        $manager->registerContentLayout('simple', ContentLayouts\Simple::class);
+        $manager->registerContentLayout('card', Card::class);
+        $manager->registerContentLayout('simple', Simple::class);
+        $manager->registerContentLayout('native', Native::class);
+        $manager->registerContentLayout('akselos-card', AkselosCard::class);
 
         new AjaxHandler();
     }
