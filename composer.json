@@ -11,6 +11,9 @@
             "email": "puleeno@gmail.com"
         }
     ],
-	"license": "MIT",
-    "require": {}
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {
+        "jankx/template-engine": "^2.0"
+    }
 }
