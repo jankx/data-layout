@@ -1,0 +1,11 @@
+<div class="jankx-data-layout grid {$columns ?? '3'}">
+    <div class="jankx-container">
+        <div class="row">
+            {foreach $items as $item}
+                <div class="col-item">
+                    {$item|noescape}
+                </div>
+            {/foreach}
+        </div>
+    </div>
+</div>

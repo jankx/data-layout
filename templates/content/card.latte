@@ -1,0 +1,49 @@
+<div class="jankx-content-layout card post-{$post->ID} thumb-{$thumb_pos ?? 'top'}">
+    {if ($show_thumb ?? true) && has_post_thumbnail($post)}
+        <div class="card-image">
+            <a href="{get_permalink($post)}">
+                {get_the_post_thumbnail($post, $thumb_size ?? 'medium')|noescape}
+            </a>
+        </div>
+    {/if}
+    <div class="card-content">
+        <div class="card-meta-top">
+            {if ($show_category ?? false)}
+                <span class="card-category">{get_the_category_list(', ', '', $post->ID)|noescape}</span>
+            {/if}
+            {if ($show_date ?? false)}
+                <span class="card-date">{get_the_date('', $post)|noescape}</span>
+            {/if}
+        </div>
+
+        {if ($show_title ?? true)}
+            <h3 class="card-title">
+                <a href="{get_permalink($post)}">{get_the_title($post)}</a>
+            </h3>
+        {/if}
+
+        {if ($show_author ?? false)}
+            <div class="card-author">
+                {get_the_author_meta('display_name', $post->post_author)|noescape}
+            </div>
+        {/if}
+
+        {if ($show_excerpt ?? true)}
+            <div class="card-excerpt">
+                {wp_trim_words(get_the_excerpt($post), $excerpt_length ?? 20)|noescape}
+            </div>
+        {/if}
+
+        {if ($show_taxonomy ?? false) && isset($taxonomy_name)}
+            <div class="card-taxonomy">
+                {get_the_term_list($post->ID, $taxonomy_name, '', ', ')|noescape}
+            </div>
+        {/if}
+
+        {if ($show_tags ?? false)}
+            <div class="card-tags">
+                {get_the_tag_list('', ', ', '', $post->ID)|noescape}
+            </div>
+        {/if}
+    </div>
+</div>
