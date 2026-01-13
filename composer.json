@@ -1,0 +1,16 @@
+{
+    "name": "jankx/data-layout",
+    "autoload": {
+        "psr-4": {
+            "Jankx\\DataLayout\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Puleeno Nguyen",
+            "email": "puleeno@gmail.com"
+        }
+    ],
+	"license": "MIT",
+    "require": {}
+}
