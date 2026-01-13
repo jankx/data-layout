@@ -1,8 +1,17 @@
 <div class="jankx-content-layout card post-{$post->ID} thumb-{$thumb_pos ?? 'top'}">
+    {var $video_url = get_post_meta($post->ID, '_video_embed_url', true) ?: get_post_meta($post->ID, '_video_url', true)}
+    {var $is_video = (get_post_format($post) === 'video' || $post->post_type === 'webinar') && !empty($video_url)}
+    {var $use_popup = ($enable_video_popup ?? false) && $is_video}
+
     {if ($show_thumb ?? true) && has_post_thumbnail($post)}
         <div class="card-image">
-            <a href="{get_permalink($post)}">
+            <a href="{$use_popup ? $video_url : get_permalink($post)}" class="{$use_popup ? 'open-video' : ''}">
                 {get_the_post_thumbnail($post, $thumb_size ?? 'medium')|noescape}
+                {if $is_video}
+                    <div class="video-overlay-icon">
+                        <i class="dashicons dashicons-controls-play"></i>
+                    </div>
+                {/if}
             </a>
         </div>
     {/if}
@@ -18,7 +27,7 @@
 
         {if ($show_title ?? true)}
             <h3 class="card-title">
-                <a href="{get_permalink($post)}">{get_the_title($post)}</a>
+                <a href="{$use_popup ? $video_url : get_permalink($post)}" class="{$use_popup ? 'open-video' : ''}">{get_the_title($post)}</a>
             </h3>
         {/if}
 

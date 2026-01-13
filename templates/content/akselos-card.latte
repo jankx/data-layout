@@ -1,11 +1,21 @@
 <div class="jankx-content-layout akselos-card post-{$post->ID}">
     <div class="card-image-wrapper">
-        <a href="{get_permalink($post)}">
+        {var $video_url = get_post_meta($post->ID, '_video_embed_url', true) ?: get_post_meta($post->ID, '_video_url', true)}
+        {var $is_video = (get_post_format($post) === 'video' || $post->post_type === 'webinar') && !empty($video_url)}
+        {var $use_popup = ($enable_video_popup ?? false) && $is_video}
+        
+        <a href="{$use_popup ? $video_url : get_permalink($post)}" class="{$use_popup ? 'open-video' : ''}">
             {if has_post_thumbnail($post)}
                 {get_the_post_thumbnail($post, 'medium')|noescape}
             {else}
                 {var $placeholder = function_exists('wc_placeholder_img_src') ? wc_placeholder_img_src() : 'https://placehold.co/600x400?text=Akselos'}
                 <img src="{$placeholder}" alt="Placeholder">
+            {/if}
+            
+            {if $is_video}
+                <div class="video-overlay-icon">
+                    <i class="dashicons dashicons-controls-play"></i>
+                </div>
             {/if}
         </a>
         <div class="date-badge">
@@ -15,7 +25,7 @@
     </div>
     <div class="card-content">
         <h3 class="card-title">
-            <a href="{get_permalink($post)}">{get_the_title($post)}</a>
+            <a href="{$use_popup ? $video_url : get_permalink($post)}" class="{$use_popup ? 'open-video' : ''}">{get_the_title($post)}</a>
         </h3>
         <div class="card-author">
             By {get_the_author_meta('display_name', $post->post_author)}
