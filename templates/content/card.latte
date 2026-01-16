@@ -17,8 +17,14 @@
     {/if}
     <div class="card-content">
         <div class="card-meta-top">
-            {if ($show_category ?? false)}
-                <span class="card-category">{get_the_category_list(', ', '', $post->ID)|noescape}</span>
+            {if ($show_category ?? false) || ($show_taxonomy ?? false)}
+                <div class="card-taxonomy result-label">
+                    {if $post->post_type === 'post'}
+                        {get_the_category_list(', ', '', $post->ID)|noescape}
+                    {elseif isset($taxonomy_name)}
+                        {get_the_term_list($post->ID, $taxonomy_name, '', ', ')|noescape}
+                    {/if}
+                </div>
             {/if}
             {if ($show_date ?? false)}
                 <span class="card-date">{get_the_date('', $post)|noescape}</span>
@@ -42,13 +48,6 @@
                 {wp_trim_words(get_the_excerpt($post), $excerpt_length ?? 20)|noescape}
             </div>
         {/if}
-
-        {if ($show_taxonomy ?? false) && isset($taxonomy_name)}
-            <div class="card-taxonomy">
-                {get_the_term_list($post->ID, $taxonomy_name, '', ', ')|noescape}
-            </div>
-        {/if}
-
         {if ($show_tags ?? false)}
             <div class="card-tags">
                 {get_the_tag_list('', ', ', '', $post->ID)|noescape}
