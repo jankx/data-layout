@@ -27,7 +27,7 @@
 
         {if ($show_title ?? true)}
             <h3 class="card-title">
-                <a href="{$use_popup ? $video_url : get_permalink($post)}" class="{$use_popup ? 'open-video' : ''}">{get_the_title($post)}</a>
+                <a href="{$use_popup ? $video_url : get_permalink($post)}" class="{$use_popup ? 'open-video' : ''}">{get_the_title($post)|noescape}</a>
             </h3>
         {/if}
 
